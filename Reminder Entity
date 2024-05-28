@@ -1,0 +1,20 @@
+import 'package:equatable/equatable.dart';
+
+class ReminderEntity extends Equatable {
+  final String id;
+  final String title;
+  final String description;
+  final DateTime time;
+  final String priority;
+
+  ReminderEntity({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.time,
+    required this.priority,
+  });
+
+  @override
+  List<Object> get props => [id, title, description, time, priority];
+}
