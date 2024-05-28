@@ -1,0 +1,30 @@
+import 'package:hive/hive.dart';
+import '../../domain/entities/reminder_entity.dart';
+import '../models/reminder_model.dart';
+
+class ReminderRepository {
+  final Box<ReminderModel> reminderBox;
+
+  ReminderRepository(this.reminderBox);
+
+  List<ReminderEntity> getReminders() {
+    return reminderBox.values.map((e) => e.toEntity()).toList();
+  }
+
+  void addReminder(ReminderEntity reminder) {
+    reminderBox.add(ReminderModel.fromEntity(reminder));
+  }
+
+  void deleteReminder(String id) {
+    reminderBox.values.firstWhere((element) => element.id == id).delete();
+  }
+
+  void editReminder(ReminderEntity reminder) {
+    final reminderModel = reminderBox.values.firstWhere((element) => element.id == reminder.id);
+    reminderModel.title = reminder.title;
+    reminderModel.description = reminder.description;
+    reminderModel.time = reminder.time;
+    reminderModel.priority = reminder.priority;
+    reminderModel.save();
+  }
+}
