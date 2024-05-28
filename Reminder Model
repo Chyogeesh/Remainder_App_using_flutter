@@ -1,0 +1,50 @@
+import 'package:hive/hive.dart';
+import '../../domain/entities/reminder_entity.dart';
+
+part 'reminder_model.g.dart';
+
+@HiveType(typeId: 0)
+class ReminderModel extends HiveObject {
+  @HiveField(0)
+  String id;
+
+  @HiveField(1)
+  String title;
+
+  @HiveField(2)
+  String description;
+
+  @HiveField(3)
+  DateTime time;
+
+  @HiveField(4)
+  String priority;
+
+  ReminderModel({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.time,
+    required this.priority,
+  });
+
+  ReminderEntity toEntity() {
+    return ReminderEntity(
+      id: id,
+      title: title,
+      description: description,
+      time: time,
+      priority: priority,
+    );
+  }
+
+  factory ReminderModel.fromEntity(ReminderEntity entity) {
+    return ReminderModel(
+      id: entity.id,
+      title: entity.title,
+      description: entity.description,
+      time: entity.time,
+      priority: entity.priority,
+    );
+  }
+}
