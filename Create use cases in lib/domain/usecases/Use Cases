@@ -1,0 +1,42 @@
+import '../entities/reminder_entity.dart';
+import '../../data/repositories/reminder_repository.dart';
+
+class AddReminder {
+  final ReminderRepository repository;
+
+  AddReminder(this.repository);
+
+  void call(ReminderEntity reminder) {
+    repository.addReminder(reminder);
+  }
+}
+
+class DeleteReminder {
+  final ReminderRepository repository;
+
+  DeleteReminder(this.repository);
+
+  void call(String id) {
+    repository.deleteReminder(id);
+  }
+}
+
+class EditReminder {
+  final ReminderRepository repository;
+
+  EditReminder(this.repository);
+
+  void call(ReminderEntity reminder) {
+    repository.editReminder(reminder);
+  }
+}
+
+class GetReminders {
+  final ReminderRepository repository;
+
+  GetReminders(this.repository);
+
+  List<ReminderEntity> call() {
+    return repository.getReminders();
+  }
+}
