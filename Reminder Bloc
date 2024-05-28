@@ -1,0 +1,44 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import '../../domain/entities/reminder_entity.dart';
+import '../../domain/usecases/add_reminder.dart';
+import '../../domain/usecases/delete_reminder.dart';
+import '../../domain/usecases/edit_reminder.dart';
+import '../../domain/usecases/get_reminders.dart';
+
+part 'reminder_event.dart';
+part 'reminder_state.dart';
+
+class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
+  final GetReminders getReminders;
+  final AddReminder addReminder;
+  final DeleteReminder deleteReminder;
+  final EditReminder editReminder;
+
+  ReminderBloc({
+    required this.getReminders,
+    required this.addReminder,
+    required this.deleteReminder,
+    required this.editReminder,
+  }) : super(ReminderInitial()) {
+    on<LoadReminders>((event, emit) {
+      final reminders = getReminders();
+      emit(RemindersLoaded(reminders));
+    });
+
+    on<CreateReminder>((event, emit) {
+      addReminder(event.reminder);
+      add(LoadReminders());
+    });
+
+    on<RemoveReminder>((event, emit) {
+      deleteReminder(event.id);
+      add(LoadReminders());
+    });
+
+    on<UpdateReminder>((event, emit) {
+      editReminder(event.reminder);
+      add(LoadReminders());
+    });
+  }
+}
