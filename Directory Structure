@@ -1,0 +1,27 @@
+lib/
+├── main.dart
+├── data/
+│   ├── models/
+│   │   └── reminder_model.dart
+│   ├── repositories/
+│       └── reminder_repository.dart
+├── domain/
+│   ├── entities/
+│   │   └── reminder_entity.dart
+│   ├── usecases/
+│       ├── add_reminder.dart
+│       ├── delete_reminder.dart
+│       ├── edit_reminder.dart
+│       └── get_reminders.dart
+├── presentation/
+│   ├── blocs/
+│   │   └── reminder_bloc.dart
+│   ├── pages/
+│   │   ├── add_reminder_page.dart
+│   │   ├── edit_reminder_page.dart
+│   │   └── reminders_page.dart
+│   ├── widgets/
+│       ├── reminder_list.dart
+│       └── reminder_form.dart
+└── utils/
+    └── notification_helper.dart
